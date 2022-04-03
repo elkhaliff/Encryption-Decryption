@@ -6,9 +6,11 @@ import java.util.stream.IntStream;
 public abstract class Crypto {
     protected String data;
     final char[] alpha;
+    protected int position;
 
-    public Crypto(String input) {
+    public Crypto(String input, int key) {
         read(input);
+        position = key;
         alpha = IntStream.rangeClosed('a', 'z')
                 .mapToObj(c -> "" + (char) c).collect(Collectors.joining()).toCharArray();
     }
@@ -27,5 +29,5 @@ public abstract class Crypto {
             out[i] = alphaStr.contains(String.valueOf(chars[i])) ? makeString(chars[i]) : chars[i];
         }
         return String.valueOf(out);
-    };
+    }
 }

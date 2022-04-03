@@ -2,19 +2,21 @@ package encryptdecrypt;
 
 public class Encrypt extends Crypto {
 
-    public Encrypt(String input) {
-        super(input);
+    public Encrypt(String input, int key) {
+        super(input, key);
     }
 
     @Override
     protected char makeString(char one) {
-        int position = 0;
+        int current = 0;
         for (int i = 0; i < alpha.length; i++) {
             if (alpha[i] == one) {
-                position = i;
+                current = i;
                 break;
             }
         }
-        return alpha[alpha.length - position - 1];
+        current += position;
+        current = current < alpha.length ? current : current - alpha.length;
+        return alpha[current];
     }
 }
