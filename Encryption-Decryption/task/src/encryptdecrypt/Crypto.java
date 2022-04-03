@@ -5,14 +5,11 @@ import java.util.stream.IntStream;
 
 public abstract class Crypto {
     protected String data;
-    final char[] alpha;
     protected int position;
 
     public Crypto(String input, int key) {
         read(input);
         position = key;
-        alpha = IntStream.rangeClosed('a', 'z')
-                .mapToObj(c -> "" + (char) c).collect(Collectors.joining()).toCharArray();
     }
 
     void read(String input) {
@@ -24,9 +21,8 @@ public abstract class Crypto {
     public String write() {
         char[] chars = data.toCharArray();
         char[] out = new char[chars.length];
-        String alphaStr = String.valueOf(alpha);
         for (int i = 0; i < chars.length; i++) {
-            out[i] = alphaStr.contains(String.valueOf(chars[i])) ? makeString(chars[i]) : chars[i];
+            out[i] = makeString(chars[i]);
         }
         return String.valueOf(out);
     }
