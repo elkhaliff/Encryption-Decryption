@@ -10,6 +10,7 @@ public class Main {
         final String ENC = "enc";
         final String DEC = "dec";
 
+        final String ALG = "-alg";
         final String MODE = "-mode";
         final String KEY = "-key";
         final String DATA = "-data";
@@ -21,6 +22,7 @@ public class Main {
         var key = 0;
         var in_file = "";
         var out_file = "";
+        var algorithm = Crypto.SHIFT;
 
         for (int i = 0; i < args.length; i++) {
             if (args[i].contains("-")) {
@@ -34,6 +36,8 @@ public class Main {
                     in_file = args[++i];
                 else if (OUT_FILE.equals(args[i]))
                     out_file = args[++i];
+                else if (ALG.equals(args[i]))
+                    algorithm = args[++i];
                 else {
                     System.out.println("Error!");
                     return;
@@ -56,9 +60,9 @@ public class Main {
 
         Crypto crypto;
         if (ENC.equals(direction))
-            crypto = new Encrypt(message, key);
+            crypto = new Encrypt(algorithm, message, key);
         else if (DEC.equals(direction))
-            crypto = new Decrypt(message, key);
+            crypto = new Decrypt(algorithm, message, key);
         else {
             System.out.println("Error!");
             return;
