@@ -18,7 +18,7 @@ public abstract class Crypto {
 
     abstract protected char makeString(char one);
 
-    public String write() {
+    public String getString() {
         char[] chars = data.toCharArray();
         char[] out = new char[chars.length];
         for (int i = 0; i < chars.length; i++) {
